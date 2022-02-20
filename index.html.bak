@@ -22,7 +22,7 @@
 	color: #fff;
 	padding: 15px 20px;
 	border-radius: 5px;}
-	input {padding:10px;}
+	input {padding:7px 10px;}
 	.kmResult {background: #fccbc0;  padding: 20px 10px;text-align:center;margin-bottom:25px; font-size:22px;}
 	.kmResult span {font-weight:bold;}
 	p {font-size:12px;}
@@ -34,22 +34,32 @@
 	<form action="">
 	<div class="box">
 	<label for="prevDistance">여행 출발전 키로수 입력 : </label>
-	<input type="text" id="prevDistance" placeholder="예시) 21234">
+	<input type="number" id="prevDistance" placeholder="예) 21234">
 	<span>/ km</span>
 	</div>
 	<div class="box">
 	<label for="nextDistance">여행 종료후 키로수 입력 : </label>
-	<input type="text" id="nextDistance" placeholder="예시) 22234">
+	<input type="number" id="nextDistance" placeholder="예) 22234">
 	<span>/ km</span>
 	</div>
 	<div class="box">
 	<label for="myCar">계산할 차량 여행 연비 : </label>
-	<input type="text" id="myCar" placeholder="예시) 10">
+	<input type="number" id="myCar" placeholder="예) 10">
 	<span>/ km</span>
 	</div>
 	<div class="box">
 	<label for="oilPrice">휘발유 평균 가격 : </label>
-	<input type="text" id="oilPrice" placeholder="예시) 1690">
+	<input type="number" id="oilPrice" placeholder="예) 1690">
+	<span>/ 원</span>  
+	</div>
+	<div class="box">
+	<label for="gatePrice">왕복 톨비 가격 : </label>
+	<input type="number" id="gatePrice" placeholder="예) 15000">
+	<span>/ 원</span>  
+	</div>
+	<div class="box">
+	<label for="tryPrice">수고비 : </label>
+	<input type="number" id="tryPrice" placeholder="예) 10000">
 	<span>/ 원</span>  
 	</div>
 	<!--  <div class="box">
@@ -63,7 +73,7 @@
 
 	<div class="kmResult">
 	금액은 '<span></span>'원 입니다.
-	<p>( *상기 금액은 톨비 & 수고비 등이 포함되지않은 값입니다. )</p>
+	<!--<p>( *상기 금액은 수고비 등이 포함되지않은 순수 경비값입니다. )</p>-->
 	</div>
 
 
@@ -72,25 +82,29 @@
 	const nextD = document.querySelector('#nextDistance');
 	const mycar = document.querySelector('#myCar');
 	const oilP = document.querySelector('#oilPrice');
-	const kmP = document.querySelector('.kmResult span');
-	/* const passP = document.querySelector('#passPrice'); */
+	const gateP = document.querySelector('#gatePrice'); 
+	const tryP = document.querySelector('#tryPrice'); 
+	const kmP = document.querySelector('.kmResult span');	
 	const Bt = document.querySelector('.bt');
 
 	function calc(){
-		let pValue = prevD.value;
+	  let pValue = prevD.value;
 	  let nValue = nextD.value;
 	  let cValue = mycar.value;
 	  let oValue = oilP.value;
+	  let gValue = Number(gateP.value);
+	  let tValue = Number(tryP.value);
 	  if(pValue !== '' && nValue !== '' && cValue !== '' && oValue !==''){
 		let a = nValue - pValue;
 		let b = a/cValue;
-		let c = b*oValue;
-		//console.log(c)
-		kmP.innerText = Math.ceil(c)
+		let c = b*oValue;		
+		let d = c + gValue;
+	    let e = d + tValue;
+		kmP.innerText = Math.ceil(e)
 		
 	  }
 	  else{
-	  alert('공란이 존재합니다 값을 넣어주세요!')
+	  alert('출발전 키로수, 종료후 키로수, 연비, 기름가격은 필수입력값입니다. 값을 넣어주세요!')
 	  }
 	}
 
