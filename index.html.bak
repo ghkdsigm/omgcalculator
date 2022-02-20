@@ -12,7 +12,7 @@
 	/* label {width:180px;display:inline-block;} */
 
 	h2 {text-align:center;font-size:18px;font-weight:bold;}
-	.box {padding:10px;border:1px solid #ccc;margin-bottom:15px;background:#eee;}
+	.box {padding:10px;border:1px solid #ccc;margin-bottom:15px;background:#eee;border-radius:5px;}
 	.box label {display:block; font-size:13px;font-weight:bold;}
 	.box span {font-size:14px;}
 	.bt {    margin: 0 auto 15px;
@@ -62,8 +62,8 @@
 
 
 	<div class="kmResult">
-	금액은 <span>''</span>원 입니다.
-	<p>( *상기 금액은 톨비&수고비 등이 포함되지않은 값입니다. )</p>
+	금액은 '<span></span>'원 입니다.
+	<p>( *상기 금액은 톨비 & 수고비 등이 포함되지않은 결과입니다. )</p>
 	</div>
 
 
