@@ -11,8 +11,8 @@
   <style>
 	/* label {width:180px;display:inline-block;} */
 
-	h2 {text-align:center;font-size:18px;}
-	.box {padding:10px;border:1px solid #ccc;margin-bottom:15px;background:#eee;}
+	h2 {text-align:center;font-size:18px;font-weight:bold;}
+	.box {padding:10px;border:1px solid #ccc;margin-bottom:15px;background:#eee;border-radius:5px;}
 	.box label {display:block; font-size:13px;font-weight:bold;}
 	.box span {font-size:14px;}
 	.bt {    margin: 0 auto 15px;
@@ -25,7 +25,7 @@
 	input {padding:10px;}
 	.kmResult {background: #fccbc0;  padding: 20px 10px;text-align:center;margin-bottom:25px; font-size:22px;}
 	.kmResult span {font-weight:bold;}
-	p {font-size:11px;}
+	p {font-size:12px;}
 	</style>
   <title>오청산운전기름계산기</title>
  </head>
@@ -35,22 +35,22 @@
 	<div class="box">
 	<label for="prevDistance">여행 출발전 키로수 입력 : </label>
 	<input type="text" id="prevDistance" placeholder="ex) 21234">
-	<span>km</span>
+	<span>/ km</span>
 	</div>
 	<div class="box">
 	<label for="nextDistance">여행 종료후 키로수 입력 : </label>
 	<input type="text" id="nextDistance" placeholder="ex) 22234">
-	<span>km</span>
+	<span>/ km</span>
 	</div>
 	<div class="box">
 	<label for="myCar">계산할 차량 여행 연비 : </label>
-	<input type="text" id="myCar" placeholder="ex) 11">
-	<span>km</span>
+	<input type="text" id="myCar" placeholder="ex) 10">
+	<span>/ km</span>
 	</div>
 	<div class="box">
 	<label for="oilPrice">휘발유 평균 가격 : </label>
 	<input type="text" id="oilPrice" placeholder="ex) 1690">
-	<span>원</span>  
+	<span>/ 원</span>  
 	</div>
 	<!--  <div class="box">
 	<label for="passPrice">톨비 가격 : </label>
@@ -87,6 +87,7 @@
 		let c = b*oValue;
 		//console.log(c)
 		kmP.innerText = Math.ceil(c)
+		
 	  }
 	  else{
 	  alert('공란이 존재합니다 값을 넣어주세요!')
