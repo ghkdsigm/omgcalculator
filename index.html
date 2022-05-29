@@ -54,6 +54,10 @@
 	.kmResult span {font-weight:bold;    color: #ff001f;
     font-weight: 600;}
 	p {font-size:12px;}
+	.haveto {      font-weight: 100;
+    font-size: 10px !important;
+    font-style: italic;
+    color: red;}
 	</style>
   <title>오청단 운전 기름 계산기</title>
  </head>
@@ -61,22 +65,22 @@
 	<h2>오청단 운전 경비 계산기</h2>
 	<form action="">
 	<div class="box">
-	<label for="prevDistance">여행 출발전 키로수 입력(필수) : </label>
+	<label for="prevDistance">여행 출발전 키로수 입력<span class="haveto">( *필수 )</span> : </label>
 	<input type="number" id="prevDistance" placeholder="예) 21234">
 	<span>/ km</span>
 	</div>
 	<div class="box">
-	<label for="nextDistance">여행 종료후 키로수 입력(필수) : </label>
+	<label for="nextDistance">여행 종료후 키로수 입력<span class="haveto">( *필수 )</span> : </label>
 	<input type="number" id="nextDistance" placeholder="예) 22234">
 	<span>/ km</span>
 	</div>
 	<div class="box">
-	<label for="myCar">계산할 차량 여행 연비(필수) : </label>
+	<label for="myCar">계산할 차량 여행 연비<span class="haveto">( *필수 )</span> : </label>
 	<input type="number" id="myCar" placeholder="예) 10">
 	<span>/ km</span>
 	</div>
 	<div class="box">
-	<label for="oilPrice">휘발유 평균 가격(필수) : </label>
+	<label for="oilPrice">휘발유 평균 가격<span class="haveto">( *필수 )</span> : </label>
 	<input type="number" id="oilPrice" placeholder="예) 1690">
 	<span>/ 원</span>  
 	</div>
