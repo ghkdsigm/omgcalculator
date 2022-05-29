@@ -11,9 +11,13 @@
   <style>
 	/* label {width:180px;display:inline-block;} */
 
-	h2 {text-align:center;font-size:16px;font-weight:bold;}
+	h2 {text-align:center;font-size:16px;font-weight:bold;color: #fff;
+  padding: 0.7rem 0.7rem 0.7rem 2rem;
+  border-radius: 10px;
+  background: linear-gradient(45deg, rgb(254, 107, 139) 30%, rgb(255, 142, 83) 90%);
+  box-shadow: rgba(255, 105, 135, 0.3) 0px 3px 5px 2px;}
 	.box {padding:10px;border:1px solid #ccc;margin-bottom:15px;background:#eee;border-radius:5px;}
-	.box label {display:block; font-size:13px;font-weight:bold;}
+	.box label {display:block; font-size:13px;font-weight:bold;    margin: 0 0 7px 0;}
 	.box span {font-size:14px;}
 	.bt {    margin: 0 auto 15px;
 	display: block;
@@ -21,9 +25,28 @@
 	background: #2162f5;
 	color: #fff;
 	padding: 15px 20px;
-	border-radius: 5px;}
-	input {padding:7px 10px;}
-	.kmResult {background: #fccbc0;  padding: 20px 10px;text-align:center;margin-bottom:25px; font-size:22px;}
+	border-radius: 5px;
+    color: #d7d7d7;
+    border: solid 1px #333;
+    background: #333;
+    background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#000));
+    background: -moz-linear-gradient(top, #666, #000);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#000000');}
+
+	input {display: inline-block;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 10px;
+    color: #333;
+    box-shadow: inset 0 2px 0 rgba(0, 0, 0, .2), 0 0 4px rgba(0, 0, 0, 0.1);
+		
+}
+	
+	input:focus {
+		outline: none;
+		box-shadow: inset 0 2px 0 rgba(0, 0, 0, .2), 0 0 4px rgba(0, 0, 0, 0.1), 0 0 5px 1px #51CBEE;
+	}
+	.kmResult {background: #fccbc0;  padding: 20px 10px;text-align:center;margin-bottom:25px; font-size:22px;    border-radius: 15px;}
 	.kmResult span {font-weight:bold;}
 	p {font-size:12px;}
 	</style>
