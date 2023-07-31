@@ -11,6 +11,17 @@
     <style>
       /* label {width:180px;display:inline-block;} */
 
+      @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        word-break: break-all;
+        font-family: Pretendard;
+      }
+
       h2 {
         text-align: center;
         font-size: 16px;
@@ -23,7 +34,8 @@
           rgb(254, 107, 139) 30%,
           rgb(255, 142, 83) 90%
         );
-        box-shadow: rgba(255, 105, 135, 0.3) 0px 3px 5px 2px;
+        box-shadow: rgba(255, 105, 135, 0.3) 0px 3px 5px 2px;    
+        margin-bottom: 15px;
       }
       .box {
         padding: 10px;
@@ -44,6 +56,7 @@
       .box span {
         font-size: 14px;
       }
+      .box .part span {font-size:12px;}
       .bt {
         font-weight: bold;
         font-size: 14px;
@@ -109,6 +122,7 @@
         font-style: italic;
         color: red;
       }
+      .sec {padding-top:5px;}
     </style>
     <title>오청단 운전 경비 정산</title>
   </head>
@@ -119,15 +133,26 @@
         <label for="prevDistance"
           >여행 출발전 키로수 입력<span class="haveto">( *필수 )</span> :
         </label>
-        <input type="number" id="prevDistance" placeholder="예) 21234" />
-        <span>/ km</span>
+        <input type="number" id="prevDistance" placeholder="예) 21234" oninput="onInput(this)"/>
+        <span>/ km
+          <div class="sec01 sec">
+            <p class='part'><span></span> / 키로미터</p>
+            <!-- <p class='all'>모든 숫자: <span></span> </p> -->
+          </div> 
+        </span>
       </div>
       <div class="box">
         <label for="nextDistance"
           >여행 종료후 키로수 입력<span class="haveto">( *필수 )</span> :
         </label>
-        <input type="number" id="nextDistance" placeholder="예) 22234" />
-        <span>/ km</span>
+        <input type="number" id="nextDistance" placeholder="예) 22234"  oninput="onInput2(this)"/>
+        <span>/ km
+          <div class="sec02 sec" style="display:flex;justify-content: space-between;">
+            <p class='part'><span></span> / 키로미터</p>
+            <p class="driveinstance" style="color: red; font-size: 11px;font-weight: 300;"></p>
+            <!-- <p class='all'>모든 숫자: <span></span> </p> -->
+          </div> 
+        </span>
       </div>
       <div class="box">
         <label for="myCar"
@@ -145,13 +170,23 @@
       </div>
       <div class="box">
         <label for="gatePrice">왕복 톨비 가격 : </label>
-        <input type="number" id="gatePrice" placeholder="예) 15000" />
-        <span>/ 원</span>
+        <input type="number" id="gatePrice" placeholder="예) 15000" oninput="onInput3(this)"/>
+        <span>/ 원
+          <div class="sec03 sec">
+            <p class='part'><span></span> / 원</p>
+            <!-- <p class='all'>모든 숫자: <span></span> </p> -->
+          </div> 
+        </span>
       </div>
       <div class="box">
         <label for="tryPrice">수고비 : </label>
-        <input type="number" id="tryPrice" placeholder="예) 10000" />
-        <span>/ 원</span>
+        <input type="number" id="tryPrice" placeholder="예) 10000" oninput="onInput4(this)"/>
+        <span>/ 원
+          <div class="sec04 sec">
+            <p class='part'><span></span> / 원</p>
+            <!-- <p class='all'>모든 숫자: <span></span> </p> -->
+          </div> 
+        </span>
       </div>
       <!--  <div class="box">
 	<label for="passPrice">톨비 가격 : </label>
@@ -175,6 +210,7 @@
       const tryP = document.querySelector('#tryPrice');
       const kmP = document.querySelector('.kmResult span');
       const Bt = document.querySelector('.bt');
+      const drive = document.querySelector('.driveinstance')
 
       function calc() {
         let pValue = prevD.value;
@@ -188,7 +224,8 @@
           let b = a / cValue;
           let c = b * oValue;
           let d = c + gValue;
-          let e = d + tValue;
+          let e = d + tValue;     
+          drive.innerText = '총' + a + 'km 주행';     
           kmP.innerText = Math.ceil(e)
             .toString()
             .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -200,6 +237,110 @@
       }
 
       Bt.addEventListener('click', calc);
+
+
+      const numberUnits = ["", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
+      const tenUnits = ["", "십", "백", "천"];
+      const thousandUnits = ["", "만", "억", "조", "경", "해"];
+
+      // 배열 쪼개기
+      function chunkAtEnd(value = "", n = 1) {
+        const result = [];
+
+        for (let end = value.length; end > 0; end -= n) {
+          result.push(value.substring(Math.max(0, end - n), end));
+        }
+
+        return result;
+      }
+
+      // 4자리씩 숫자로 변환
+      function formatNumber(number) {
+        return chunkAtEnd(String(number), 4)
+          .reduce((acc, item, index) => {
+            const unit = thousandUnits[index] ?? "";
+
+            if (!Number(item)) {
+              return acc;
+            }
+
+            return `${Number(item)}${unit} ${acc}`;
+          }, "")
+          .trim();
+      }
+
+      // 모든 숫자 바꾸기
+      function formatNumberAll(number) {
+        return chunkAtEnd(String(number), 4)
+          .reduce((acc, item, index) => {
+            if (!Number(item)) {
+              return acc;
+            } 
+          
+            let numberUnit = "";
+
+            const zeroNum = item.padStart(4, "0");
+
+            for (let i = 0; i < 4; i++) {
+              const number = Number(zeroNum[i]);
+
+              if (number) {
+                const unit = tenUnits[3 - i];
+
+                numberUnit += `${
+                  unit && number === 1 ? "" : numberUnits[number]
+                }${unit}`;
+              }
+            }
+          
+            const thousandUnit = thousandUnits[index] ?? "";
+
+            return `${numberUnit + thousandUnit} ${acc}`;
+          }, "")
+          .trim();
+      }
+
+      // -----------------------------------
+
+      function onInput(target) {
+        // 숫자만 남기기
+        const value = target.value.replace(/[^0-9]+/g, "");
+
+        document.querySelector(".sec01 .part span").innerHTML = formatNumber(value);
+        //document.querySelector(".sec01 .all span").innerHTML = formatNumberAll(value);
+
+        target.value = value;
+      }
+
+      function onInput2(target) {
+        // 숫자만 남기기
+        const value = target.value.replace(/[^0-9]+/g, "");
+
+        document.querySelector(".sec02 .part span").innerHTML = formatNumber(value);
+        //document.querySelector(".sec02 .all span").innerHTML = formatNumberAll(value);
+
+        target.value = value;
+      }
+
+      function onInput3(target) {
+        // 숫자만 남기기
+        const value = target.value.replace(/[^0-9]+/g, "");
+
+        document.querySelector(".sec03 .part span").innerHTML = formatNumber(value);
+        //document.querySelector(".sec03 .all span").innerHTML = formatNumberAll(value);
+
+        target.value = value;
+      }
+
+      function onInput4(target) {
+        // 숫자만 남기기
+        const value = target.value.replace(/[^0-9]+/g, "");
+
+        document.querySelector(".sec04 .part span").innerHTML = formatNumber(value);
+        //document.querySelector(".sec04 .all span").innerHTML = formatNumberAll(value);
+
+        target.value = value;
+      }
     </script>
   </body>
 </html>
